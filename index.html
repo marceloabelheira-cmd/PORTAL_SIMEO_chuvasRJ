@@ -1687,6 +1687,62 @@ tbody tr:hover td{background:var(--blue-bg)!important}
 .feb-badge{display:inline-flex;align-items:center;background:#FFFBEB;color:#92400E;font-size:10.5px;font-weight:700;padding:3px 10px;border-radius:20px;border:1px solid rgba(180,83,9,.2)}
 .empty{text-align:center;color:var(--text3);padding:3rem 1rem;font-size:13px}
 
+
+/* ═══ MODAL ═══════════════════════════════════════════════════ */
+.modal-overlay{
+  display:none;position:fixed;inset:0;z-index:1000;
+  background:rgba(11,31,58,.55);backdrop-filter:blur(3px);
+  align-items:center;justify-content:center;padding:1.5rem;
+}
+.modal-overlay.open{display:flex}
+.modal{
+  background:var(--surface);border-radius:var(--r-xl);
+  box-shadow:0 8px 40px rgba(0,0,0,.25),0 2px 8px rgba(0,0,0,.12);
+  width:100%;max-width:560px;max-height:85vh;
+  display:flex;flex-direction:column;overflow:hidden;
+}
+.modal-header{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:18px 22px 14px;
+  border-bottom:1px solid var(--border);
+  background:var(--navy);
+  flex-shrink:0;
+}
+.modal-header-left{display:flex;flex-direction:column;gap:3px}
+.modal-title{font-size:14px;font-weight:700;color:#fff}
+.modal-sub{font-size:11px;color:rgba(255,255,255,.5);font-weight:400}
+.modal-close{
+  width:30px;height:30px;border-radius:8px;border:none;
+  background:rgba(255,255,255,.1);color:rgba(255,255,255,.7);
+  font-size:16px;cursor:pointer;display:flex;align-items:center;
+  justify-content:center;transition:all .15s;flex-shrink:0;
+  font-family:inherit;
+}
+.modal-close:hover{background:rgba(255,255,255,.2);color:#fff}
+.modal-body{overflow-y:auto;flex:1}
+.modal-table{width:100%;border-collapse:collapse;font-size:12.5px}
+.modal-table thead tr{background:var(--surface2)}
+.modal-table thead th{
+  font-size:10px;font-weight:700;color:var(--text3);
+  text-transform:uppercase;letter-spacing:.7px;
+  padding:10px 16px;text-align:left;
+  border-bottom:1.5px solid var(--border2);
+  position:sticky;top:0;background:var(--surface2);
+}
+.modal-table tbody td{
+  padding:10px 16px;border-bottom:1px solid var(--border);
+  color:var(--text);vertical-align:middle;
+}
+.modal-table tbody tr:last-child td{border-bottom:none}
+.modal-table tbody tr:nth-child(even) td{background:var(--surface2)}
+.modal-table tbody tr:hover td{background:var(--blue-bg)!important}
+.modal-footer{
+  padding:12px 22px;border-top:1px solid var(--border);
+  font-size:11px;color:var(--text3);
+  background:var(--surface2);flex-shrink:0;
+  display:flex;align-items:center;justify-content:space-between;
+}
+
 /* ═══ FOOTER ════════════════════════════════════════════════ */
 .footer{margin-top:3rem;text-align:center;font-size:11px;color:var(--text3);padding-bottom:2.5rem;line-height:1.9}
 .footer strong{color:var(--text2)}
@@ -2141,7 +2197,7 @@ function render(){
   const topM=Object.entries(mc).sort((a,b)=>b[1]-a[1]).slice(0,8);
   const maxM=topM.length?topM[0][1]:1;
   document.getElementById('topMunic').innerHTML=topM.map(([k,c],i)=>`
-    <div class=&quot;tc&quot;>
+    <div class=&quot;tc&quot; onclick=&quot;openMunic('${k}')&quot; style=&quot;cursor:pointer&quot; title=&quot;Clique para ver os eventos de ${k}&quot;>
       <div class=&quot;tc-rank&quot;>#${i+1}</div>
       <div class=&quot;tc-name&quot; title=&quot;${k}&quot;>${k}</div>
       <div class=&quot;tc-num&quot;>${c}</div>
@@ -2161,7 +2217,7 @@ function render(){
   const fd=s=>{const p=s.split('-');return p[2]+'/'+p[1]+'/'+p[0];};
   document.getElementById('topDias').innerHTML=topD.map(([dt,i],idx)=>{
     const tip=`GRAU 1: ${i.g1} evento${i.g1!==1?'s':''}\nGRAU 2: ${i.g2} evento${i.g2!==1?'s':''}\nGRAU 3: ${i.g3} evento${i.g3!==1?'s':''}`;
-    return `<div class=&quot;tc&quot; data-tip=&quot;${tip}&quot;>
+    return `<div class=&quot;tc&quot; data-tip=&quot;${tip}&quot; onclick=&quot;openDia('${dt}')&quot; style=&quot;cursor:pointer&quot; title=&quot;Clique para ver os eventos de ${fd(dt)}&quot;>
       <div class=&quot;tc-rank&quot;>#${idx+1}</div>
       <div class=&quot;tc-name&quot;>${fd(dt)}</div>
       <div class=&quot;tc-num&quot;>${i.n}</div>
@@ -2171,6 +2227,73 @@ function render(){
   }).join('');
 
   drawTable(data);
+}
+
+
+// ── Modal ─────────────────────────────────────────────────────
+function gc(g){return g==='GRAU 1'?'g1':g==='GRAU 2'?'g2':'g3';}
+function sg(g){return g==='GRAU 1'?'GRAU 1 — Moderado':g==='GRAU 2'?'GRAU 2 — Alto':'GRAU 3 — Muito alto';}
+function fdd(s){const p=s.split('-');return p[2]+'/'+p[1]+'/'+p[0];}
+
+function openModal(title, sub, headHTML, rowsHTML, count){
+  document.getElementById('modalTitle').textContent = title;
+  document.getElementById('modalSub').textContent   = sub;
+  document.getElementById('modalHead').innerHTML    = headHTML;
+  document.getElementById('modalBody').innerHTML    = rowsHTML;
+  document.getElementById('modalCount').textContent = count;
+  document.getElementById('modalOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal(e){
+  if(e.target === document.getElementById('modalOverlay')) closeModalDirect();
+}
+function closeModalDirect(){
+  document.getElementById('modalOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeModalDirect(); });
+
+function openMunic(nome){
+  const eventos = filtered.filter(d => d.m === nome)
+    .sort((a,b) => a.d < b.d ? -1 : a.d > b.d ? 1 : 0);
+  const head = `<tr>
+    <th>Data</th>
+    <th>Evento</th>
+    <th>Classificação</th>
+  </tr>`;
+  const rows = eventos.map(d => `<tr>
+    <td style=&quot;white-space:nowrap;font-weight:600;color:var(--text2)&quot;>${fdd(d.d)}</td>
+    <td style=&quot;color:var(--text2)&quot;>${d.e}</td>
+    <td><span class=&quot;badge ${gc(d.g)}&quot;><span class=&quot;bdot&quot;></span>${sg(d.g)}</span></td>
+  </tr>`).join('');
+  openModal(
+    nome,
+    'Detalhamento dos eventos registrados',
+    head, rows,
+    eventos.length + ' evento' + (eventos.length !== 1 ? 's' : '') + ' registrado' + (eventos.length !== 1 ? 's' : '')
+  );
+}
+
+function openDia(data){
+  const eventos = filtered.filter(d => d.d === data)
+    .sort((a,b) => a.m < b.m ? -1 : a.m > b.m ? 1 : 0);
+  const head = `<tr>
+    <th>Município</th>
+    <th>REDEC</th>
+    <th>Classificação</th>
+  </tr>`;
+  const rows = eventos.map(d => `<tr>
+    <td style=&quot;font-weight:600&quot;>${d.m}</td>
+    <td style=&quot;text-align:center&quot;><span class=&quot;rchip&quot;>REDEC ${d.r}</span></td>
+    <td><span class=&quot;badge ${gc(d.g)}&quot;><span class=&quot;bdot&quot;></span>${sg(d.g)}</span></td>
+  </tr>`).join('');
+  openModal(
+    fdd(data),
+    'Eventos registrados nesta data',
+    head, rows,
+    eventos.length + ' evento' + (eventos.length !== 1 ? 's' : '') + ' registrado' + (eventos.length !== 1 ? 's' : '')
+  );
 }
 
 // ── Init ──────────────────────────────────────────────────────
@@ -2185,6 +2308,30 @@ const rC=document.getElementById('fgRedec');
 document.getElementById('th-d').classList.add('sort-desc');
 render();
 </script>
+
+<!-- ══ MODAL ════════════════════════════════════════════════════ -->
+<div class=&quot;modal-overlay&quot; id=&quot;modalOverlay&quot; onclick=&quot;closeModal(event)&quot;>
+  <div class=&quot;modal&quot;>
+    <div class=&quot;modal-header&quot;>
+      <div class=&quot;modal-header-left&quot;>
+        <div class=&quot;modal-title&quot; id=&quot;modalTitle&quot;>—</div>
+        <div class=&quot;modal-sub&quot; id=&quot;modalSub&quot;>—</div>
+      </div>
+      <button class=&quot;modal-close&quot; onclick=&quot;closeModalDirect()&quot;>✕</button>
+    </div>
+    <div class=&quot;modal-body&quot;>
+      <table class=&quot;modal-table&quot;>
+        <thead id=&quot;modalHead&quot;></thead>
+        <tbody id=&quot;modalBody&quot;></tbody>
+      </table>
+    </div>
+    <div class=&quot;modal-footer&quot;>
+      <span id=&quot;modalCount&quot;></span>
+      <span style=&quot;font-style:italic&quot;>Clique fora para fechar</span>
+    </div>
+  </div>
+</div>
+
 </body>
 </html>" title="Escala de Impactos"></iframe>
 </div>
