@@ -1640,25 +1640,17 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--t
 .rrow{position:relative}
 .rrow[data-tip]:hover::after{
   content:attr(data-tip);
-  position:absolute;
-  left:70px;
-  top:calc(100% + 6px);
-  background:var(--navy);
-  color:#fff;
+  position:absolute;left:70px;top:calc(100% + 6px);
+  background:var(--navy);color:#fff;
   font-size:11px;font-weight:500;line-height:1.7;
   padding:9px 14px;border-radius:9px;
   white-space:pre;z-index:500;pointer-events:none;
-  box-shadow:0 4px 16px rgba(0,0,0,.3);
-  min-width:210px;
+  box-shadow:0 4px 16px rgba(0,0,0,.3);min-width:210px;
   font-family:'Inter',system-ui,sans-serif;
 }
 .rrow[data-tip]:hover::before{
-  content:'';
-  position:absolute;
-  left:110px;
-  top:calc(100% + 0px);
-  border:6px solid transparent;
-  border-bottom-color:var(--navy);
+  content:'';position:absolute;left:110px;top:calc(100% + 0px);
+  border:6px solid transparent;border-bottom-color:var(--navy);
   z-index:501;pointer-events:none;
 }
 
@@ -1688,61 +1680,76 @@ tbody tr:hover td{background:var(--blue-bg)!important}
 .empty{text-align:center;color:var(--text3);padding:3rem 1rem;font-size:13px}
 
 
-/* ═══ MODAL ═══════════════════════════════════════════════════ */
-.modal-overlay{
-  display:none;position:fixed;inset:0;z-index:1000;
-  background:rgba(11,31,58,.55);backdrop-filter:blur(3px);
-  align-items:center;justify-content:center;padding:1.5rem;
-}
+/* ═══ MODAL ════════════════════════════════════════════════════ */
+.modal-overlay{display:none;position:fixed;inset:0;z-index:1000;background:rgba(11,31,58,.55);backdrop-filter:blur(3px);align-items:center;justify-content:center;padding:1.5rem}
 .modal-overlay.open{display:flex}
-.modal{
-  background:var(--surface);border-radius:var(--r-xl);
-  box-shadow:0 8px 40px rgba(0,0,0,.25),0 2px 8px rgba(0,0,0,.12);
-  width:100%;max-width:560px;max-height:85vh;
-  display:flex;flex-direction:column;overflow:hidden;
-}
-.modal-header{
-  display:flex;align-items:center;justify-content:space-between;
-  padding:18px 22px 14px;
-  border-bottom:1px solid var(--border);
-  background:var(--navy);
-  flex-shrink:0;
-}
-.modal-header-left{display:flex;flex-direction:column;gap:3px}
+.modal{background:var(--surface);border-radius:var(--r-xl);box-shadow:0 8px 40px rgba(0,0,0,.25);width:100%;max-width:560px;max-height:85vh;display:flex;flex-direction:column;overflow:hidden}
+.modal-header{display:flex;align-items:center;justify-content:space-between;padding:18px 22px 14px;border-bottom:1px solid var(--border);background:var(--navy);flex-shrink:0}
 .modal-title{font-size:14px;font-weight:700;color:#fff}
-.modal-sub{font-size:11px;color:rgba(255,255,255,.5);font-weight:400}
-.modal-close{
-  width:30px;height:30px;border-radius:8px;border:none;
-  background:rgba(255,255,255,.1);color:rgba(255,255,255,.7);
-  font-size:16px;cursor:pointer;display:flex;align-items:center;
-  justify-content:center;transition:all .15s;flex-shrink:0;
-  font-family:inherit;
-}
+.modal-sub{font-size:11px;color:rgba(255,255,255,.5);margin-top:2px}
+.modal-close{width:30px;height:30px;border-radius:8px;border:none;background:rgba(255,255,255,.1);color:rgba(255,255,255,.7);font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .15s;font-family:inherit}
 .modal-close:hover{background:rgba(255,255,255,.2);color:#fff}
 .modal-body{overflow-y:auto;flex:1}
 .modal-table{width:100%;border-collapse:collapse;font-size:12.5px}
 .modal-table thead tr{background:var(--surface2)}
-.modal-table thead th{
-  font-size:10px;font-weight:700;color:var(--text3);
-  text-transform:uppercase;letter-spacing:.7px;
-  padding:10px 16px;text-align:left;
-  border-bottom:1.5px solid var(--border2);
-  position:sticky;top:0;background:var(--surface2);
-}
-.modal-table tbody td{
-  padding:10px 16px;border-bottom:1px solid var(--border);
-  color:var(--text);vertical-align:middle;
-}
+.modal-table thead th{font-size:10px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.7px;padding:10px 16px;text-align:left;border-bottom:1.5px solid var(--border2);position:sticky;top:0;background:var(--surface2)}
+.modal-table tbody td{padding:10px 16px;border-bottom:1px solid var(--border);color:var(--text);vertical-align:middle}
 .modal-table tbody tr:last-child td{border-bottom:none}
 .modal-table tbody tr:nth-child(even) td{background:var(--surface2)}
 .modal-table tbody tr:hover td{background:var(--blue-bg)!important}
-.modal-footer{
-  padding:12px 22px;border-top:1px solid var(--border);
-  font-size:11px;color:var(--text3);
-  background:var(--surface2);flex-shrink:0;
-  display:flex;align-items:center;justify-content:space-between;
-}
+.modal-footer{padding:11px 22px;border-top:1px solid var(--border);font-size:11px;color:var(--text3);background:var(--surface2);flex-shrink:0;display:flex;align-items:center;justify-content:space-between}
 
+
+/* ═══ DATE RANGE PICKER ════════════════════════════════════════ */
+.drp-block{display:flex;flex-direction:column;gap:9px;position:relative}
+.drp-btn{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:5px 13px;border-radius:20px;
+  border:1.5px solid var(--border2);background:var(--surface2);
+  font-size:11.5px;font-weight:500;color:var(--text2);
+  cursor:pointer;user-select:none;transition:all .15s;font-family:inherit;white-space:nowrap;
+}
+.drp-btn:hover{border-color:var(--blue2);color:var(--blue)}
+.drp-btn.drp-on{background:var(--navy);border-color:var(--navy);color:#fff;box-shadow:0 2px 6px rgba(11,31,58,.25)}
+.drp-btn.drp-open{border-color:var(--blue2);color:var(--blue);background:var(--blue-bg)}
+.drp-chev{font-size:8px;opacity:.55;transition:transform .15s}
+.drp-btn.drp-open .drp-chev{transform:rotate(180deg)}
+.drp-x{font-size:9px;font-weight:700;padding:1px 5px;background:rgba(255,255,255,.2);border-radius:4px;margin-left:1px}
+.drp-btn.drp-on:hover .drp-x{background:rgba(255,255,255,.35)}
+.drp-pop{
+  display:none;position:absolute;top:calc(100% + 7px);left:0;
+  background:var(--surface);border:1.5px solid var(--border2);
+  border-radius:var(--r-xl);
+  box-shadow:0 8px 32px rgba(0,0,0,.14),0 2px 8px rgba(0,0,0,.07);
+  z-index:600;padding:16px;width:480px;
+}
+.drp-pop.drp-open{display:block}
+.drp-cals{display:flex;gap:14px}
+.drp-cal{flex:1}
+.drp-ch{display:flex;align-items:center;justify-content:space-between;margin-bottom:9px}
+.drp-nav{width:26px;height:26px;border-radius:7px;border:1.5px solid var(--border2);background:transparent;cursor:pointer;font-size:14px;color:var(--text2);font-family:inherit;display:flex;align-items:center;justify-content:center;transition:all .15s}
+.drp-nav:hover{background:var(--surface3);border-color:var(--text3)}
+.drp-mlbl{font-size:12px;font-weight:700;color:var(--text)}
+.drp-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:2px}
+.drp-dh{font-size:9px;font-weight:700;color:var(--text3);text-align:center;padding:3px 0}
+.drp-d{aspect-ratio:1;border-radius:5px;border:none;background:transparent;font-size:11.5px;font-weight:500;color:var(--text2);display:flex;align-items:center;justify-content:center;font-family:inherit;cursor:default;transition:background .1s,color .1s;width:100%;position:relative}
+.drp-d.ev{font-weight:600}
+.drp-d.in-month{color:var(--text);cursor:pointer}
+.drp-d.in-month:hover{background:var(--blue-bg);color:var(--blue)}
+.drp-d.rs{background:var(--navy)!important;color:#fff!important;font-weight:700;border-radius:5px 0 0 5px}
+.drp-d.re{background:var(--navy)!important;color:#fff!important;font-weight:700;border-radius:0 5px 5px 0}
+.drp-d.rs.re{border-radius:5px!important}
+.drp-d.ir{background:var(--blue-bg);color:var(--blue);border-radius:0}
+.drp-d.bl{visibility:hidden}
+.drp-d.ev::after{content:'';position:absolute;bottom:2px;left:50%;transform:translateX(-50%);width:3px;height:3px;border-radius:50%;background:var(--teal)}
+.drp-d.rs::after,.drp-d.re::after,.drp-d.ir::after{background:transparent}
+.drp-foot{margin-top:12px;padding-top:11px;border-top:1px solid var(--border);display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.drp-pre{font-size:10.5px;padding:4px 9px;border-radius:6px;border:1.5px solid var(--border2);background:transparent;color:var(--text2);cursor:pointer;font-family:inherit;transition:all .15s;font-weight:500}
+.drp-pre:hover{background:var(--surface3);color:var(--text)}
+.drp-hint{font-size:10.5px;color:var(--text3);font-style:italic;flex:1;text-align:center}
+.drp-apply{font-size:11.5px;padding:6px 16px;border-radius:8px;background:var(--navy);border:none;color:#fff;cursor:pointer;font-family:inherit;font-weight:700;transition:background .15s}
+.drp-apply:hover{background:var(--navy3)}
+.drp-apply:disabled{opacity:.35;cursor:default}
 /* ═══ FOOTER ════════════════════════════════════════════════ */
 .footer{margin-top:3rem;text-align:center;font-size:11px;color:var(--text3);padding-bottom:2.5rem;line-height:1.9}
 .footer strong{color:var(--text2)}
@@ -1805,6 +1812,28 @@ tbody tr:hover td{background:var(--blue-bg)!important}
       <button class=&quot;cbx-btn on-default&quot; data-val=&quot;2026-02&quot; onclick=&quot;toggle(this,'mes')&quot;>⚠ Fev/26</button>
       <button class=&quot;cbx-btn on-default&quot; data-val=&quot;2026-03&quot; onclick=&quot;toggle(this,'mes')&quot;>Mar/26</button>
       <button class=&quot;cbx-btn on-default&quot; data-val=&quot;2026-04&quot; onclick=&quot;toggle(this,'mes')&quot;>Abr/26</button>
+    </div>
+  </div>
+  <div class=&quot;filter-vsep&quot;></div>
+  <div class=&quot;filter-block drp-block&quot;>
+    <div class=&quot;filter-title&quot;>Intervalo de datas</div>
+    <div>
+      <div class=&quot;drp-btn&quot; id=&quot;drpBtn&quot; onclick=&quot;drpToggle()&quot;>
+        <span>📅</span><span id=&quot;drpLbl&quot;>Selecionar...</span><span class=&quot;drp-chev&quot;>▼</span>
+      </div>
+      <div class=&quot;drp-pop&quot; id=&quot;drpPop&quot;>
+        <div class=&quot;drp-cals&quot;>
+          <div class=&quot;drp-cal&quot; id=&quot;drpC0&quot;></div>
+          <div class=&quot;drp-cal&quot; id=&quot;drpC1&quot;></div>
+        </div>
+        <div class=&quot;drp-foot&quot;>
+          <button class=&quot;drp-pre&quot; onclick=&quot;drpPre('2025-11-01','2026-04-30')&quot;>Todo período</button>
+          <button class=&quot;drp-pre&quot; onclick=&quot;drpPre('2026-02-01','2026-02-28')&quot;>Fev/26</button>
+          <button class=&quot;drp-pre&quot; onclick=&quot;drpPre('2026-01-01','2026-02-28')&quot;>Jan–Fev/26</button>
+          <span class=&quot;drp-hint&quot; id=&quot;drpHint&quot;>Clique no dia inicial</span>
+          <button class=&quot;drp-apply&quot; id=&quot;drpApply&quot; onclick=&quot;drpApply()&quot; disabled>Aplicar</button>
+        </div>
+      </div>
     </div>
   </div>
   <div class=&quot;filter-vsep&quot;></div>
@@ -1941,6 +1970,97 @@ const C1=&quot;#F5A623&quot;,C2=&quot;#E02020&quot;,C3=&quot;#7C3AED&quot;;
 let cMes=null,cGrau=null,geoLyr=null,tileLyr=null;
 let filtered=[],sortMode='qtd',tCol='d',tDir='desc';
 
+
+// ── Date Range Picker ─────────────────────────────────────────
+const EV_DATES = new Set(RAW.map(d=>d.d));
+const MON_FULL = ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Jul.','Agosto','Setembro','Outubro','Novembro','Dezembro'];
+const DOW_S    = ['D','S','T','Q','Q','S','S'];
+let drp = {open:false, vL:{y:2025,m:11}, vR:{y:2025,m:12},
+           step:'start', s:null, e:null, active:{s:null,e:null}};
+
+function drpFmt(d){const p=d.split('-');return p[2]+'/'+p[1]+'/'+p[0];}
+
+function drpToggle(){
+  drp.open=!drp.open;
+  document.getElementById('drpPop').classList.toggle('drp-open',drp.open);
+  document.getElementById('drpBtn').classList.toggle('drp-open',drp.open);
+  if(drp.open){drpRender();setTimeout(()=>document.addEventListener('mousedown',drpOut),0);}
+  else document.removeEventListener('mousedown',drpOut);
+}
+function drpOut(e){
+  if(!document.getElementById('drpPop').contains(e.target)&amp;&amp;
+     !document.getElementById('drpBtn').contains(e.target)){
+    drp.open=false;
+    document.getElementById('drpPop').classList.remove('drp-open');
+    document.getElementById('drpBtn').classList.remove('drp-open');
+    document.removeEventListener('mousedown',drpOut);
+  }
+}
+function drpNavL(d){let {y,m}=drp.vL;m+=d;if(m>12){m=1;y++;}if(m<1){m=12;y--;}drp.vL={y,m};if(y>drp.vR.y||(y===drp.vR.y&amp;&amp;m>=drp.vR.m)){let m2=m+1,y2=y;if(m2>12){m2=1;y2++;}drp.vR={y:y2,m:m2};}drpRender();}
+function drpNavR(d){let {y,m}=drp.vR;m+=d;if(m>12){m=1;y++;}if(m<1){m=12;y--;}drp.vR={y,m};if(y<drp.vL.y||(y===drp.vL.y&amp;&amp;m<=drp.vL.m)){let m2=m-1,y2=y;if(m2<1){m2=12;y2--;}drp.vL={y:y2,m:m2};}drpRender();}
+function drpRender(){drpRC('drpC0',drp.vL.y,drp.vL.m,'L');drpRC('drpC1',drp.vR.y,drp.vR.m,'R');}
+function drpRC(id,y,m,side){
+  const days=new Date(y,m,0).getDate(), fd=new Date(y,m-1,1).getDay();
+  const lo=drp.s&amp;&amp;drp.e?(drp.s<drp.e?drp.s:drp.e):drp.s;
+  const hi=drp.s&amp;&amp;drp.e?(drp.s<drp.e?drp.e:drp.s):drp.s;
+  let h=`<div class=&quot;drp-ch&quot;>
+    <button class=&quot;drp-nav&quot; onclick=&quot;drpNav${side}(-1)&quot;>‹</button>
+    <span class=&quot;drp-mlbl&quot;>${MON_FULL[m-1]} ${y}</span>
+    <button class=&quot;drp-nav&quot; onclick=&quot;drpNav${side}(1)&quot;>›</button>
+  </div><div class=&quot;drp-grid&quot;>`;
+  DOW_S.forEach(d=>{h+=`<div class=&quot;drp-dh&quot;>${d}</div>`;});
+  for(let i=0;i<fd;i++) h+=`<div class=&quot;drp-d bl&quot;></div>`;
+  for(let d=1;d<=days;d++){
+    const ds=`${y}-${String(m).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+    const ev=EV_DATES.has(ds);
+    let c='drp-d in-month'+(ev?' ev':'');
+    if(lo&amp;&amp;hi){if(ds===lo)c+=' rs';else if(ds===hi)c+=' re';else if(ds>lo&amp;&amp;ds<hi)c+=' ir';}
+    else if(lo&amp;&amp;ds===lo)c+=' rs re';
+    h+=`<button class=&quot;${c}&quot; onclick=&quot;drpClick('${ds}')&quot;>${d}</button>`;
+  }
+  h+='</div>';
+  document.getElementById(id).innerHTML=h;
+}
+function drpClick(ds){
+  if(drp.step==='start'){drp.s=ds;drp.e=null;drp.step='end';document.getElementById('drpHint').textContent='Agora clique no dia final';document.getElementById('drpApply').disabled=true;}
+  else{drp.e=ds;drp.step='start';const lo=drp.s<drp.e?drp.s:drp.e,hi=drp.s<drp.e?drp.e:drp.s;drp.s=lo;drp.e=hi;document.getElementById('drpHint').textContent=drpFmt(lo)+' → '+drpFmt(hi);document.getElementById('drpApply').disabled=false;}
+  drpRender();
+}
+function drpPre(s,e){
+  drp.s=s;drp.e=e;drp.step='start';
+  const p=s.split('-');drp.vL={y:+p[0],m:+p[1]};
+  let m2=+p[1]+1,y2=+p[0];if(m2>12){m2=1;y2++;}drp.vR={y:y2,m:m2};
+  document.getElementById('drpHint').textContent=drpFmt(s)+' → '+drpFmt(e);
+  document.getElementById('drpApply').disabled=false;
+  drpRender();
+}
+function drpApply(){
+  drp.active={s:drp.s,e:drp.e||drp.s};
+  const lbl=drp.active.s===drp.active.e?drpFmt(drp.active.s):drpFmt(drp.active.s)+' → '+drpFmt(drp.active.e);
+  document.getElementById('drpLbl').textContent=lbl;
+  const btn=document.getElementById('drpBtn');
+  btn.classList.add('drp-on');btn.classList.remove('drp-open');
+  if(!document.getElementById('drpX')){
+    const x=document.createElement('span');x.id='drpX';x.className='drp-x';x.textContent='✕';
+    x.onclick=e=>{e.stopPropagation();drpClear();};
+    btn.appendChild(x);
+  }
+  drp.open=false;
+  document.getElementById('drpPop').classList.remove('drp-open');
+  document.removeEventListener('mousedown',drpOut);
+  render();
+}
+function drpClear(){
+  drp.active={s:null,e:null};drp.s=null;drp.e=null;drp.step='start';
+  document.getElementById('drpLbl').textContent='Selecionar...';
+  const btn=document.getElementById('drpBtn');
+  btn.classList.remove('drp-on','drp-open');
+  document.getElementById('drpHint').textContent='Clique no dia inicial';
+  document.getElementById('drpApply').disabled=true;
+  const x=document.getElementById('drpX');if(x)x.remove();
+  render();
+}
+
 // ── Filter state ──────────────────────────────────────────────
 const FS={
   mes:  new Set([&quot;2025-11&quot;,&quot;2025-12&quot;,&quot;2026-01&quot;,&quot;2026-02&quot;,&quot;2026-03&quot;,&quot;2026-04&quot;]),
@@ -1985,11 +2105,11 @@ function selectPeak(){
 }
 
 function getFiltered(){
-  return RAW.filter(d=>
-    FS.mes.has(d.d.slice(0,7)) &amp;&amp;
-    FS.redec.has(d.r) &amp;&amp;
-    FS.grau.has(d.g)
-  );
+  return RAW.filter(d=>{
+    const mesOk  = FS.mes.has(d.d.slice(0,7));
+    const drpOk  = !drp.active.s || (d.d >= drp.active.s &amp;&amp; d.d <= drp.active.e);
+    return mesOk &amp;&amp; drpOk &amp;&amp; FS.redec.has(d.r) &amp;&amp; FS.grau.has(d.g);
+  });
 }
 
 // ── Leaflet ───────────────────────────────────────────────────
@@ -2083,8 +2203,7 @@ function drawRedec(data){
         const g=rg[r],tot=rt[r],pct=Math.round(tot/maxR*100);
         const w1=Math.round(g.g1/tot*pct),w2=Math.round(g.g2/tot*pct),w3=Math.round(g.g3/tot*pct);
         const pk=isFev&amp;&amp;r===11;
-        const tipTxt=`GRAU 1 — Moderado: ${g.g1} evento${g.g1!==1?'s':''}&amp;#10;GRAU 2 — Alto: ${g.g2} evento${g.g2!==1?'s':''}&amp;#10;GRAU 3 — Muito alto: ${g.g3} evento${g.g3!==1?'s':''}&amp;#10;─────────────────&amp;#10;Total: ${tot} evento${tot!==1?'s':''}`;
-        return `<div class=&quot;rrow${pk?' peak':''}&quot; data-tip=&quot;${tipTxt}&quot;>
+        return `<div class=&quot;rrow${pk?' peak':''}&quot;>
           <span class=&quot;rlbl&quot;>REDEC ${r}</span>
           <div class=&quot;rtrack&quot;>
             <div class=&quot;rseg&quot; style=&quot;width:${w1}%;background:${C1}&quot;></div>
@@ -2197,7 +2316,7 @@ function render(){
   const topM=Object.entries(mc).sort((a,b)=>b[1]-a[1]).slice(0,8);
   const maxM=topM.length?topM[0][1]:1;
   document.getElementById('topMunic').innerHTML=topM.map(([k,c],i)=>`
-    <div class=&quot;tc&quot; onclick=&quot;openMunic('${k}')&quot; style=&quot;cursor:pointer&quot; title=&quot;Clique para ver os eventos de ${k}&quot;>
+    <div class=&quot;tc&quot; onclick=&quot;openMunic('${k}')&quot; style=&quot;cursor:pointer&quot;>
       <div class=&quot;tc-rank&quot;>#${i+1}</div>
       <div class=&quot;tc-name&quot; title=&quot;${k}&quot;>${k}</div>
       <div class=&quot;tc-num&quot;>${c}</div>
@@ -2217,7 +2336,7 @@ function render(){
   const fd=s=>{const p=s.split('-');return p[2]+'/'+p[1]+'/'+p[0];};
   document.getElementById('topDias').innerHTML=topD.map(([dt,i],idx)=>{
     const tip=`GRAU 1: ${i.g1} evento${i.g1!==1?'s':''}\nGRAU 2: ${i.g2} evento${i.g2!==1?'s':''}\nGRAU 3: ${i.g3} evento${i.g3!==1?'s':''}`;
-    return `<div class=&quot;tc&quot; data-tip=&quot;${tip}&quot; onclick=&quot;openDia('${dt}')&quot; style=&quot;cursor:pointer&quot; title=&quot;Clique para ver os eventos de ${fd(dt)}&quot;>
+    return `<div class=&quot;tc&quot; data-tip=&quot;${tip}&quot; onclick=&quot;openDia('${dt}')&quot; style=&quot;cursor:pointer&quot;>
       <div class=&quot;tc-rank&quot;>#${idx+1}</div>
       <div class=&quot;tc-name&quot;>${fd(dt)}</div>
       <div class=&quot;tc-num&quot;>${i.n}</div>
@@ -2231,69 +2350,32 @@ function render(){
 
 
 // ── Modal ─────────────────────────────────────────────────────
-function gc(g){return g==='GRAU 1'?'g1':g==='GRAU 2'?'g2':'g3';}
-function sg(g){return g==='GRAU 1'?'GRAU 1 — Moderado':g==='GRAU 2'?'GRAU 2 — Alto':'GRAU 3 — Muito alto';}
-function fdd(s){const p=s.split('-');return p[2]+'/'+p[1]+'/'+p[0];}
-
-function openModal(title, sub, headHTML, rowsHTML, count){
-  document.getElementById('modalTitle').textContent = title;
-  document.getElementById('modalSub').textContent   = sub;
-  document.getElementById('modalHead').innerHTML    = headHTML;
-  document.getElementById('modalBody').innerHTML    = rowsHTML;
-  document.getElementById('modalCount').textContent = count;
+function _gc(g){return g==='GRAU 1'?'g1':g==='GRAU 2'?'g2':'g3';}
+function _sg(g){return g==='GRAU 1'?'GRAU 1 — Moderado':g==='GRAU 2'?'GRAU 2 — Alto':'GRAU 3 — Muito alto';}
+function _fd(s){const p=s.split('-');return p[2]+'/'+p[1]+'/'+p[0];}
+function openModal(title,sub,headH,rowsH,count){
+  document.getElementById('modalTitle').textContent=title;
+  document.getElementById('modalSub').textContent=sub;
+  document.getElementById('modalHead').innerHTML=headH;
+  document.getElementById('modalBody').innerHTML=rowsH;
+  document.getElementById('modalCount').textContent=count;
   document.getElementById('modalOverlay').classList.add('open');
-  document.body.style.overflow = 'hidden';
+  document.body.style.overflow='hidden';
 }
-
-function closeModal(e){
-  if(e.target === document.getElementById('modalOverlay')) closeModalDirect();
-}
-function closeModalDirect(){
-  document.getElementById('modalOverlay').classList.remove('open');
-  document.body.style.overflow = '';
-}
-document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeModalDirect(); });
-
+function closeModal(e){if(e.target===document.getElementById('modalOverlay'))closeModalDirect();}
+function closeModalDirect(){document.getElementById('modalOverlay').classList.remove('open');document.body.style.overflow='';}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModalDirect();});
 function openMunic(nome){
-  const eventos = filtered.filter(d => d.m === nome)
-    .sort((a,b) => a.d < b.d ? -1 : a.d > b.d ? 1 : 0);
-  const head = `<tr>
-    <th>Data</th>
-    <th>Evento</th>
-    <th>Classificação</th>
-  </tr>`;
-  const rows = eventos.map(d => `<tr>
-    <td style=&quot;white-space:nowrap;font-weight:600;color:var(--text2)&quot;>${fdd(d.d)}</td>
-    <td style=&quot;color:var(--text2)&quot;>${d.e}</td>
-    <td><span class=&quot;badge ${gc(d.g)}&quot;><span class=&quot;bdot&quot;></span>${sg(d.g)}</span></td>
-  </tr>`).join('');
-  openModal(
-    nome,
-    'Detalhamento dos eventos registrados',
-    head, rows,
-    eventos.length + ' evento' + (eventos.length !== 1 ? 's' : '') + ' registrado' + (eventos.length !== 1 ? 's' : '')
-  );
+  const ev=filtered.filter(d=>d.m===nome).sort((a,b)=>a.d<b.d?-1:a.d>b.d?1:0);
+  const head=`<tr><th>Data</th><th>Evento</th><th>Classificação</th></tr>`;
+  const rows=ev.map(d=>`<tr><td style=&quot;white-space:nowrap;font-weight:600;color:var(--text2)&quot;>${_fd(d.d)}</td><td style=&quot;color:var(--text2)&quot;>${d.e}</td><td><span class=&quot;badge ${_gc(d.g)}&quot;><span class=&quot;bdot&quot;></span>${_sg(d.g)}</span></td></tr>`).join('');
+  openModal(nome,'Detalhamento dos eventos registrados',head,rows,ev.length+' evento'+(ev.length!==1?'s':'')+' registrado'+(ev.length!==1?'s':''));
 }
-
 function openDia(data){
-  const eventos = filtered.filter(d => d.d === data)
-    .sort((a,b) => a.m < b.m ? -1 : a.m > b.m ? 1 : 0);
-  const head = `<tr>
-    <th>Município</th>
-    <th>REDEC</th>
-    <th>Classificação</th>
-  </tr>`;
-  const rows = eventos.map(d => `<tr>
-    <td style=&quot;font-weight:600&quot;>${d.m}</td>
-    <td style=&quot;text-align:center&quot;><span class=&quot;rchip&quot;>REDEC ${d.r}</span></td>
-    <td><span class=&quot;badge ${gc(d.g)}&quot;><span class=&quot;bdot&quot;></span>${sg(d.g)}</span></td>
-  </tr>`).join('');
-  openModal(
-    fdd(data),
-    'Eventos registrados nesta data',
-    head, rows,
-    eventos.length + ' evento' + (eventos.length !== 1 ? 's' : '') + ' registrado' + (eventos.length !== 1 ? 's' : '')
-  );
+  const ev=filtered.filter(d=>d.d===data).sort((a,b)=>a.m<b.m?-1:a.m>b.m?1:0);
+  const head=`<tr><th>Município</th><th>REDEC</th><th>Classificação</th></tr>`;
+  const rows=ev.map(d=>`<tr><td style=&quot;font-weight:600&quot;>${d.m}</td><td style=&quot;text-align:center&quot;><span class=&quot;rchip&quot;>REDEC ${d.r}</span></td><td><span class=&quot;badge ${_gc(d.g)}&quot;><span class=&quot;bdot&quot;></span>${_sg(d.g)}</span></td></tr>`).join('');
+  openModal(_fd(data),'Eventos registrados nesta data',head,rows,ev.length+' evento'+(ev.length!==1?'s':'')+' registrado'+(ev.length!==1?'s':''));
 }
 
 // ── Init ──────────────────────────────────────────────────────
@@ -2306,32 +2388,20 @@ const rC=document.getElementById('fgRedec');
   rC.appendChild(b);
 });
 document.getElementById('th-d').classList.add('sort-desc');
+drpRender();
 render();
 </script>
 
-<!-- ══ MODAL ════════════════════════════════════════════════════ -->
 <div class=&quot;modal-overlay&quot; id=&quot;modalOverlay&quot; onclick=&quot;closeModal(event)&quot;>
   <div class=&quot;modal&quot;>
     <div class=&quot;modal-header&quot;>
-      <div class=&quot;modal-header-left&quot;>
-        <div class=&quot;modal-title&quot; id=&quot;modalTitle&quot;>—</div>
-        <div class=&quot;modal-sub&quot; id=&quot;modalSub&quot;>—</div>
-      </div>
+      <div><div class=&quot;modal-title&quot; id=&quot;modalTitle&quot;>—</div><div class=&quot;modal-sub&quot; id=&quot;modalSub&quot;>—</div></div>
       <button class=&quot;modal-close&quot; onclick=&quot;closeModalDirect()&quot;>✕</button>
     </div>
-    <div class=&quot;modal-body&quot;>
-      <table class=&quot;modal-table&quot;>
-        <thead id=&quot;modalHead&quot;></thead>
-        <tbody id=&quot;modalBody&quot;></tbody>
-      </table>
-    </div>
-    <div class=&quot;modal-footer&quot;>
-      <span id=&quot;modalCount&quot;></span>
-      <span style=&quot;font-style:italic&quot;>Clique fora para fechar</span>
-    </div>
+    <div class=&quot;modal-body&quot;><table class=&quot;modal-table&quot;><thead id=&quot;modalHead&quot;></thead><tbody id=&quot;modalBody&quot;></tbody></table></div>
+    <div class=&quot;modal-footer&quot;><span id=&quot;modalCount&quot;></span><span style=&quot;font-style:italic&quot;>Clique fora para fechar</span></div>
   </div>
 </div>
-
 </body>
 </html>" title="Escala de Impactos"></iframe>
 </div>
